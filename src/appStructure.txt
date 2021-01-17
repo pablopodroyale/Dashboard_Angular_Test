@@ -1,0 +1,58 @@
+● src
++---● app
+|   +--● components
+|   |  |
+|   |  +--●footer
+|   |  |  |--footer.component.ts|.html|.scss
+|   |  |
+|   |  +--● navbar
+|   |  |  |--navbar.component.ts|.html|.scss
+|   |  |          
+|   |  +--● sidebar
+|   |  |  |--sidebar.component.ts|.html|.scss
+|   |  
+|   +--● layouts
+|   |  |
+|   |  +--admin-layout
+|   |  |  |--admin-layout.component.ts|.html|.scss
+|   |  |  |--admin-layout.module.ts
+|   |  |  |--admin-layout.routing.ts
+|   |  |
+|   |  +--auth-layout
+|   |  |  |--auth-layout.component.ts|.html|.scss
+|   |  |  |--auth-layout.routing.ts
+|   |  |  |--auth-layout.routing.ts
+|   |          
+|   +--● pages
+|   |  |
+|   |  +--dashboard
+|   |  |  |--dashboard.component.ts|.html|.scss
+|   |  |
+|   |  +--icons
+|   |  |  |--icons.component.ts|.html|.scss
+|   |  |  
+|   |  +--● sidebar
+|   |  |  |--sidebar.component.ts|.html|.scss
+|   |  | 
+|   |  +--● login
+|   |  |  |--login.component.ts|.html|.scss
+|   |  |
+|   |  +--● register
+|   |  |  |--register.component.ts|.html|.scss
+|   |  |
+|   |  |
+|   |  +--● shared
+|   |  |  |
+|   |  |  +--● Dto
+|   |  |  |  |--CreateUserDto
+|   |  |  |  |--LoginUserDto
+|   |  |  | 
+|   |  |  |--user.service.ts
+|   |  |  |--user.model.ts
+|   |
+|   |--app.component.ts|.html|.scss
+|   |--app.module.ts
+|   |--app.routing.ts
+|
+|--main.ts 
+|--index.html (cdn path for bootstrap)
