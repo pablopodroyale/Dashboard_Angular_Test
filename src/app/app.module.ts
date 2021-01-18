@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { UserService } from './shared/user.service';
 import { HttpModule } from '@angular/http';
 
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptorService } from './layouts/auth-layout/auth.interceptor';
 
 @NgModule({
   imports: [
@@ -35,7 +36,11 @@ import { ToastrModule } from 'ngx-toastr';
     AdminLayoutComponent,
     AuthLayoutComponent,
   ],
-  providers: [UserService, FormBuilder],
+  providers: [UserService, FormBuilder,
+    { provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

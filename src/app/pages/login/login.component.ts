@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(public userService: UserService, private fb: FormBuilder, private toast: ToastrService, private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('token') != null) {
+      this.router.navigate(['/dashboard']);
+    }
     this.formLogin = this.fb.group({
       Nickname: ['', Validators.required],
       Password: ['', Validators.required]
