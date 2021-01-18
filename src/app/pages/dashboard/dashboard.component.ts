@@ -8,6 +8,9 @@ import {
   chartExample1,
   chartExample2
 } from "../../variables/charts";
+import { UserService } from 'src/app/shared/user.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +25,24 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
 
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService){
+
+  }
+
   ngOnInit() {
+    this.userService.getUserProfile()
+    .subscribe(
+      success =>{
+        console.log('en sesion')
+      },
+      error =>{
+        console.log('fuera de sesion')
+
+        this.toastr.info('Sesion expirada');
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      }
+    );
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
