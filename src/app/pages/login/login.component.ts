@@ -12,10 +12,10 @@ import { LoginUserDto, RawLoginUserDto } from 'src/app/shared/Dto/loginUserDto.c
 })
 export class LoginComponent implements OnInit, OnDestroy {
   formLogin: FormGroup;
-  ERROR_NICKNAME_REQUIRED:string = "El email es requerido";
-  ERROR_PASSWORD_REQUIRED:string = "El password es requerido";
+  ERROR_NICKNAME_REQUIRED: string = "El email es requerido";
+  ERROR_PASSWORD_REQUIRED: string = "El password es requerido";
 
-  constructor(public userService: UserService, private fb: FormBuilder, private toast: ToastrService, private router:Router) {}
+  constructor(public userService: UserService, private fb: FormBuilder, private toast: ToastrService, private router: Router) { }
 
   ngOnInit() {
     this.formLogin = this.fb.group({
@@ -32,23 +32,24 @@ export class LoginComponent implements OnInit, OnDestroy {
       const loginUserDto = new LoginUserDto(this.formLogin.value as RawLoginUserDto);
       this.userService.Login(loginUserDto)
         .subscribe(
-        (res:any) => {
-          // res = res.json()
-          if (res.succedded == true) {
-            this.toast.success(`Bienvenido ${loginUserDto.NickName}`);
-            this.formLogin.reset()
-            this.router.navigate(['/login']);
-          }else{
-            let errors = res.errors.map(x => x.description)
-            this.toast.error(errors.join(', \n'));
-            console.log(res.errors)
+          (res: any) => {
+            // res = res.json()
+            if (res.succedded == true) {
+              localStorage.setItem('token', res.obj);
+              this.toast.success(`Bienvenido ${loginUserDto.NickName}`);
+              this.formLogin.reset()
+              this.router.navigate(['/dashboard']);
+            } else {
+              let errors = res.errors.map(x => x.description)
+              this.toast.error(errors.join(', \n'));
+              console.log(res.errors)
+            }
+          },
+          error => {
+            this.toast.error("Error de conexión");
+            console.log(error)
           }
-        },
-        error => {
-          this.toast.error("Error de conexión");
-          console.log(error)
-        }
-      );
+        );
     }
   }
 
